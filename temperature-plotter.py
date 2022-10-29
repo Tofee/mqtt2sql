@@ -17,7 +17,7 @@ def graph_data(sqlite_file, image_path):
     now = datetime.now()
     conn = sqlite3.connect(sqlite_file)
     c = conn.cursor()
-    c.execute('SELECT ts,value FROM mqtt_history')
+    c.execute("SELECT ts,value FROM mqtt_history WHERE datetime(ts) >= datetime('now', '-2 days');")
     data = c.fetchall()
     # data[*][0] = timestamp
     # data[*][1] = json payload
